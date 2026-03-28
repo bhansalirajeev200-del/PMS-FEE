@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMS Fee Structure</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f0; color: #1a1a1a; font-size: 15px; line-height: 1.6; }
+
+  .header { background: #fff; border-bottom: 1px solid #e8e8e0; padding: 20px; text-align: center; }
+  .header h1 { font-size: 20px; font-weight: 600; color: #1a1a1a; }
+  .header p { font-size: 13px; color: #888; margin-top: 4px; }
+
+  .container { max-width: 520px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  .notice { background: #fff8ec; border-left: 3px solid #e8a020; border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 13px; color: #7a4f00; margin-bottom: 24px; }
+
+  .section-label { font-size: 11px; font-weight: 600; color: #999; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 12px; }
+
+  .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+  .plan-card { background: #fff; border: 1px solid #e8e8e0; border-radius: 12px; padding: 16px; }
+  .plan-card.featured { border: 2px solid #2979d8; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 6px; background: #e8f0fd; color: #1a5cbf; margin-bottom: 8px; }
+  .plan-name { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .plan-sub { font-size: 12px; color: #888; margin-bottom: 14px; }
+  .prow { display: flex; justify-content: space-between; align-items: flex-start; padding: 7px 0; border-bottom: 1px solid #f0f0ec; gap: 8px; }
+  .prow:last-child { border-bottom: none; padding-bottom: 0; }
+  .plabel { font-size: 12px; color: #888; }
+  .pval { font-size: 12px; font-weight: 500; text-align: right; }
+  .pval.blue { color: #2979d8; }
+
+  .calc-section { background: #fff; border-radius: 12px; border: 1px solid #e8e8e0; padding: 20px; margin-bottom: 28px; }
+  .slider-block { margin-bottom: 20px; }
+  .slider-top { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+  .slider-top span:last-child { font-weight: 600; color: #2979d8; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 28px; background: transparent; outline: none; cursor: pointer; }
+  input[type=range]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: #e0e0d8; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #2979d8; margin-top: -10px; }
+  input[type=range]::-moz-range-track { height: 4px; border-radius: 2px; background: #e0e0d8; }
+  input[type=range]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #2979d8; border: none; }
+
+  .metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .metric { background: #f7f7f3; border-radius: 8px; padding: 10px; }
+  .metric-label { font-size: 11px; color: #888; margin-bottom: 3px; }
+  .metric-value { font-size: 16px; font-weight: 600; }
+
+  .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .bcard { background: #f7f7f3; border-radius: 10px; padding: 14px; }
+  .bcard-title { font-size: 12px; font-weight: 600; margin-bottom: 10px; color: #555; }
+  .brow { display: flex; justify-content: space-between; font-size: 12px; padding: 4px 0; }
+  .brow.total { border-top: 1px solid #e0e0d8; margin-top: 6px; padding-top: 8px; font-weight: 600; }
+  .brow.youfee { color: #2979d8; font-weight: 600; }
+  .brow.retrow { color: #888; font-size: 11px; margin-top: 4px; }
+
+  .terms-section { background: #fff; border-radius: 12px; border: 1px solid #e8e8e0; padding: 20px; margin-bottom: 28px; }
+  .term { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0ec; }
+  .term:last-child { border-bottom: none; padding-bottom: 0; }
+  .term-num { font-size: 11px; font-weight: 600; color: #bbb; min-width: 18px; margin-top: 2px; }
+  .term-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+  .term-desc { font-size: 12px; color: #777; line-height: 1.5; }
+
+  .footer { text-align: center; font-size: 12px; color: #bbb; margin-top: 32px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>PMS Fee Structure</h1>
+  <p>Portfolio Management Service — Terms & Fee Plans</p>
+</div>
+
+<div class="container">
+
+  <div class="notice">
+    Tax on trading profits is the client's own responsibility and is handled entirely outside this fee structure.
+  </div>
+
+  <div class="section-label">Choose your plan</div>
+  <div class="plan-grid">
+    <div class="plan-card">
+      <div class="plan-name">Plan A</div>
+      <div class="plan-sub">Flat gross profit share</div>
+      <div class="prow"><span class="plabel">Hurdle rate</span><span class="pval">None</span></div>
+      <div class="prow"><span class="plabel">Fee basis</span><span class="pval">Gross profit</span></div>
+      <div class="prow"><span class="plabel">Your fee</span><span class="pval blue">20% of gross profit</span></div>
+      <div class="prow"><span class="plabel">High water mark</span><span class="pval">Yes</span></div>
+      <div class="prow"><span class="plabel">Lock-in</span><span class="pval">1 year</span></div>
+    </div>
+    <div class="plan-card featured">
+      <div class="badge">Recommended</div>
+      <div class="plan-name">Plan B</div>
+      <div class="plan-sub">Gross profit share post hurdle</div>
+      <div class="prow"><span class="plabel">Hurdle rate</span><span class="pval blue">10% p.a.</span></div>
+      <div class="prow"><span class="plabel">Fee basis</span><span class="pval">Above hurdle only</span></div>
+      <div class="prow"><span class="plabel">Your fee</span><span class="pval blue">30% above hurdle</span></div>
+      <div class="prow"><span class="plabel">High water mark</span><span class="pval">Yes</span></div>
+      <div class="prow"><span class="plabel">Lock-in</span><span class="pval">1 year</span></div>
+    </div>
+  </div>
+
+  <div class="section-label">Fee calculator</div>
+  <div class="calc-section">
+    <div class="slider-block">
+      <div class="slider-top"><span>Capital deployed</span><span id="cap-out">₹10,00,000</span></div>
+      <input type="range" min="10" max="100" value="10" step="5" id="cap-slider" oninput="calc()" onchange="calc()">
+    </div>
+    <div class="slider-block">
+      <div class="slider-top"><span>Annual return %</span><span id="ret-out">25%</span></div>
+      <input type="range" min="5" max="60" value="25" step="1" id="ret-slider" oninput="calc()" onchange="calc()">
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Gross profit</div><div class="metric-value" id="m-gross">—</div></div>
+      <div class="metric"><div class="metric-label">Fee — Plan A</div><div class="metric-value" id="m-a">—</div></div>
+      <div class="metric"><div class="metric-label">Fee — Plan B</div><div class="metric-value" id="m-b">—</div></div>
+    </div>
+    <div class="breakdown-grid">
+      <div class="bcard">
+        <div class="bcard-title">Plan A breakdown</div>
+        <div class="brow"><span>Gross profit</span><span id="a-gross">—</span></div>
+        <div class="brow youfee total"><span>Manager fee (20%)</span><span id="a-fee">—</span></div>
+        <div class="brow total"><span>You keep</span><span id="a-client">—</span></div>
+        <div class="brow retrow"><span>Your return</span><span id="a-ret">—</span></div>
+      </div>
+      <div class="bcard">
+        <div class="bcard-title">Plan B breakdown</div>
+        <div class="brow"><span>Gross profit</span><span id="b-gross">—</span></div>
+        <div class="brow"><span>Hurdle (10%)</span><span id="b-hurdle">—</span></div>
+        <div class="brow"><span>Above hurdle</span><span id="b-above">—</span></div>
+        <div class="brow youfee total"><span>Manager fee (30%)</span><span id="b-fee">—</span></div>
+        <div class="brow total"><span>You keep</span><span id="b-client">—</span></div>
+        <div class="brow retrow"><span>Your return</span><span id="b-ret">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Fee payment terms</div>
+  <div class="terms-section">
+    <div class="term">
+      <div class="term-num">01</div>
+      <div>
+        <div class="term-title">Fee calculation frequency</div>
+        <div class="term-desc">P&L is calculated annually at the end of the 1-year lock-in. No mid-year fee is charged.</div>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-num">02</div>
+      <div>
+        <div class="term-title">Fee basis</div>
+        <div class="term-desc">All fee calculations are on gross (pre-tax) profit. Tax filing and payment is entirely the client's own responsibility.</div>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-num">03</div>
+      <div>
+        <div class="term-title">Fee payment timeline</div>
+        <div class="term-desc">Client transfers manager fee within 7 working days of the lock-in end date, after reviewing the P&L statement provided.</div>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-num">04</div>
+      <div>
+        <div class="term-title">High water mark</div>
+        <div class="term-desc">If the year ends in a loss, no fee is charged. Fee resumes only when capital crosses the previous peak (starting capital).</div>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-num">05</div>
+      <div>
+        <div class="term-title">Early exit clause</div>
+        <div class="term-desc">Exit is allowed only if drawdown exceeds 25% from peak. Fee is settled on the exit date, not year-end.</div>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-num">06</div>
+      <div>
+        <div class="term-title">Plan lock-in</div>
+        <div class="term-desc">Chosen plan (A or B) is locked for the full 1-year term. Switch is only allowed at renewal before the next term begins.</div>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-num">07</div>
+      <div>
+        <div class="term-title">P&L statement</div>
+        <div class="term-desc">A trade-by-trade gross P&L summary is provided at year-end showing gross profit, hurdle calculation (Plan B), and net fee payable.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">For queries, contact your portfolio manager.</div>
+
+</div>
+
+<script>
+function fmtNum(n) {
+  var s = Math.round(Math.abs(n)).toString();
+  var result = '';
+  var len = s.length;
+  for (var i = 0; i < len; i++) {
+    var pos = len - i;
+    if (i > 0) {
+      if (pos === 3 || (pos < 3 && (pos - 3) % 2 === 0)) result = ',' + result;
+    }
+    result = s[i] + result;
+  }
+  return (n < 0 ? '-' : '') + result;
+}
+function fmt(n) {
+  if (Math.abs(n) >= 100000) return '\u20B9' + (n/100000).toFixed(1) + 'L';
+  return '\u20B9' + fmtNum(n);
+}
+function calc() {
+  var cap = parseInt(document.getElementById('cap-slider').value) * 100000;
+  var ret = parseInt(document.getElementById('ret-slider').value);
+  var capL = (cap / 100000).toFixed(0);
+  document.getElementById('cap-out').textContent = '\u20B9' + capL + ',00,000';
+  document.getElementById('ret-out').textContent = ret + '%';
+
+  var gross = cap * ret / 100;
+  var hurdle = cap * 0.10;
+
+  var feeA = gross * 0.20;
+  var clientA = gross - feeA;
+  var retA = (clientA / cap * 100).toFixed(1);
+
+  var aboveHurdle = Math.max(0, gross - hurdle);
+  var feeB = aboveHurdle * 0.30;
+  var clientB = gross - feeB;
+  var retB = (clientB / cap * 100).toFixed(1);
+
+  document.getElementById('m-gross').textContent = fmt(gross);
+  document.getElementById('m-a').textContent = fmt(feeA);
+  document.getElementById('m-b').textContent = fmt(feeB);
+
+  document.getElementById('a-gross').textContent = fmt(gross);
+  document.getElementById('a-fee').textContent = fmt(feeA);
+  document.getElementById('a-client').textContent = fmt(clientA);
+  document.getElementById('a-ret').textContent = retA + '% on capital';
+
+  document.getElementById('b-gross').textContent = fmt(gross);
+  document.getElementById('b-hurdle').textContent = '\u2212' + fmt(hurdle);
+  document.getElementById('b-above').textContent = fmt(aboveHurdle);
+  document.getElementById('b-fee').textContent = fmt(feeB);
+  document.getElementById('b-client').textContent = fmt(clientB);
+  document.getElementById('b-ret').textContent = retB + '% on capital';
+}
+calc();
+</script>
+</body>
+</html>
